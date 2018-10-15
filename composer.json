@@ -1,0 +1,35 @@
+{
+    "name": "davidc/schema-live",
+    "description": "This package generate base configuration for eloquent models from schema",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../IsolatedExpression"
+        }
+    ],
+    "authors": [
+        {
+            "name": "David Callizaya",
+            "email": "davidcallizaya@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nano\\SchemaLive\\": "src/Nano/SchemaLive/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
+    "require": {
+        "doctrine/dbal": "*",
+        "doctrine/inflector": "*",
+        "davidc/isolated-expression": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    }
+}
