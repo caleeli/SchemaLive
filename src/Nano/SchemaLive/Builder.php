@@ -39,6 +39,7 @@ class Builder
             }
         }
         foreach ($tables as $table) {
+            $this->attColumns[$table]['attributes'] = [];
             $this->attColumns[$table]['fillable'] = [];
             $this->attColumns[$table]['guarded'] = [];
             $this->attColumns[$table]['casts'] = [];
@@ -58,6 +59,7 @@ class Builder
     private function readAttColumn(Column $column, $table)
     {
         $key = $column->getName();
+        $this->attColumns[$table]['attributes'][$key] = $column->getDefault();
         $this->attColumns[$table]['fillable'][] = $key;
         if ($column->getNotnull() && $column->getDefault() === null && !$column->getAutoincrement()) {
             $this->attColumns[$table]['rules'][$key][] = 'required';

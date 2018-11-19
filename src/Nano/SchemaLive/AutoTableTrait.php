@@ -2,6 +2,8 @@
 
 namespace Nano\SchemaLive;
 
+use ReflectionClass;
+
 /**
  * Configure model from database schema
  *
@@ -125,5 +127,38 @@ trait AutoTableTrait
         } else {
             return parent::__call($method, $parameters);
         }
+    }
+
+    /**
+     * Sync the original attributes with the current.
+     *
+     * @return $this
+     */
+    public function syncOriginal()
+    {
+        $connection = $this->getConnection()->getName();
+        $table = $this->getTable();
+        // Add the attributes from the table
+        $this->attributes = array_merge(
+            isset(self::$attConfig[$connection]['fields'][$table])
+                ? self::$attConfig[$connection]['fields'][$table]['attributes'] : [],
+            $this->attributes
+        );
+        return parent::syncOriginal();
+    }
+
+    /**
+     * Get the static connection name for the model.
+     *
+     * @return string
+     */
+    protected static function getStaticConnectionName()
+    {
+        $reflection = new ReflectionClass(static::class);
+        $properties = $reflection->getDefaultProperties();
+        $connection = isset($properties['connection'])
+            ? $properties['connection']
+            : config('database.default');
+        return $connection;
     }
 }
