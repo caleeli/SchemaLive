@@ -43,6 +43,7 @@ class Builder
             $this->attColumns[$table]['fillable'] = [];
             $this->attColumns[$table]['guarded'] = [];
             $this->attColumns[$table]['casts'] = [];
+            $this->attColumns[$table]['rules'] = [];
             foreach ($schema->listTableColumns($table) as $column) {
                 $this->readAttColumn($column, $table);
             }

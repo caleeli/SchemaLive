@@ -4,8 +4,8 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "path",
-            "url": "../IsolatedExpression"
+            "type": "vcs",
+            "url": "git@github.com:caleeli/IsolatedExpression.git"
         }
     ],
     "authors": [
